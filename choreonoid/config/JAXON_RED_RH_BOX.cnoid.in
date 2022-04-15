@@ -58,7 +58,7 @@ items:
                 isNoDelayMode: true
                 controllerOptions: ""
                 moduleName: "@hrpsys_choreonoid_DIR@/lib/RobotHardware_choreonoid"
-                confFileName: "@hrpsys_choreonoid_tutorials@/config/BodyRTC_JAXON_RED.RH.conf"
+                confFileName: "@hrpsys_choreonoid_tutorials_DIR@/config/BodyRTC_JAXON_RED.RH.conf"
                 configurationMode: "Use Configuration File"
                 autoConnect: false
                 instanceName: "JAXON_RED(Robot)0"

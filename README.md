@@ -103,7 +103,17 @@ choreonoid/share/modelの下や、rtm-ros-robotics/rtmros_choreonoid/jvrc_models
 チュートリアルを書こうと思ったけど公式のチュートリアルよりわかりやすくなる気がしないのでサンプルと比べながら公式のものを見てください・・・。
 
 ## STEP4: carry_boxデモ
-euslisp/carry_box.lに詳しく書きました。
+choreonoidの起動
+```bash
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`choreonoid/config/JAXON_RED_RH_BOX.cnoid
+```
+別タブでeusの起動
+```bash
+$ roscd box_tutorial/euslisp
+$ roseus carry_box.l
+```
+
+euslisp/carry_box.lにコメントを詳しく書きました。
 
 hrpsysの様々なコマンドは https://github.com/start-jsk/rtmros_common/blob/master/hrpsys_ros_bridge/test/hrpsys-samples/README.md を参照
 

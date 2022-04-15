@@ -1,0 +1,36 @@
+format: ChoreonoidBody
+formatVersion: 1.0
+
+name: box
+rootLink: body
+links:
+  -
+    name: body
+    jointType: free
+    mass: 0.5  
+    inertia: [
+      0.072533, 0,       0,
+      0,       0.008533, 0,
+      0,       0,       0.072533 ]
+    elements:
+      -
+        type: Transform
+        translation: [ 0.0, 0.0, 0.0 ]
+        elements:
+          Shape:
+            geometry:
+              type: Box
+              size: [ 0.2, 0.4, 0.2]
+            appearance: &BodyAppearance
+              material:
+                diffuseColor: [ 1.0, 1.0, 0.0 ]
+      -
+        type: Transform
+        translation: [ 0.0, 0.0, 0.02 ]
+        elements:
+          Shape:
+            geometry:
+              type: Cylinder
+              radius: 0.03
+              height: 0.45
+            appearance: *BodyAppearance

@@ -82,7 +82,8 @@ hrpsysを用いてロボットを動かす場合、一度シミュレーショ�
 ⑥のworldを選択してから④を押して現在のワールドを初期状態に設定する。  
 →　⑧に設定できた感じの文章が流れる
 
-ファイル＞名前をつけてプロジェクトを保存、　catkin_ws/src/box_tutorial/choreonoi/config/JAXON_RED_RH_hoge.cnoid
+ファイル＞名前をつけてプロジェクトを保存、　catkin_ws/src/box_tutorial/choreonoi/config/JAXON_RED_RH_hoge.cnoid  
+※ hogeの部分を適宜変更。
 
 ### 作成したプロジェクトの実行
 ```bash
@@ -93,8 +94,17 @@ $ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE
 **ボディファイルの場所**
 choreonoid/share/modelの下や、rtm-ros-robotics/rtmros_choreonoid/jvrc_modelsなど。
 
-## bodyファイルを作る
+## STEP3: bodyファイルを作る
 参考：  
 　choreonoidのbodyファイルチュートリアル： https://choreonoid.org/ja/manuals/1.7/handling-models/modelfile/modelfile-newformat.html
 
+ボディファイルはyaml形式になっている。記法についてはこれなどを参考に。https://magazine.rubyist.net/articles/0009/0009-YAML.html
 
+チュートリアルを書こうと思ったけど公式のチュートリアルよりわかりやすくなる気がしないのでサンプルと比べながら公式のものを見てください・・・。
+
+## STEP4: carry_boxデモ
+euslisp/carry_box.lに詳しく書きました。
+
+hrpsysの様々なコマンドは https://github.com/start-jsk/rtmros_common/blob/master/hrpsys_ros_bridge/test/hrpsys-samples/README.md を参照
+
+※今後更新予定・・・

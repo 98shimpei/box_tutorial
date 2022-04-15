@@ -1,0 +1,112 @@
+format: ChoreonoidBody
+formatVersion: 1.0
+angleUnit: degree
+name: Bucket
+
+links:
+  -
+    name: Base
+    translation: [ 0, 0, 0 ]
+    jointType: free
+    centerOfMass: [ 0, 0, -0.02 ]
+    mass: 0.3
+    inertia: [
+      0.005, 0,   0,
+      0,   0.005, 0,
+      0,   0,   0.005 ]
+    elements:
+      -
+        type: Transform
+        translation: [0, 0, -0.1]
+        elements:
+          Shape:
+            geometry:
+              type: Box
+              size: [ 0.3, 0.3, 0.02]
+              height: 0.02
+            appearance: &BodyAppearance
+              material:
+                diffuseColor: [ 1.0, 1.0, 0 ]
+      -
+        type: Transform
+        translation: [0, 0.14, 0]
+        elements:
+          Shape:
+            geometry:
+              type: Box
+              size: [ 0.3, 0.02, 0.22 ]
+            appearance: *BodyAppearance
+      -
+        type: Transform
+        translation: [0, -0.14, 0]
+        elements:
+          Shape:
+            geometry:
+              type: Box
+              size: [ 0.3, 0.02, 0.22 ]
+            appearance: *BodyAppearance
+      -
+        type: Transform
+        translation: [0.14, 0, 0]
+        elements:
+          Shape:
+            geometry:
+              type: Box
+              size: [ 0.02, 0.3, 0.22 ]
+            appearance: *BodyAppearance
+      -
+        type: Transform
+        translation: [-0.14, 0, 0]
+        elements:
+          Shape:
+            geometry:
+              type: Box
+              size: [ 0.02, 0.3, 0.22 ]
+            appearance: *BodyAppearance
+  -
+    name: Handle
+    parent: Base
+    jointType: revolute
+    jointAxis: [ 0, 1, 0 ]
+    jointRange: unlimited
+    mass: 0.1
+    centerOfMass: [ 0, 0, 0.18 ]
+    inertia: [
+      0.001, 0,       0,
+      0,       0.001, 0,
+      0,       0,       0.001 ]
+    translation: [ 0, 0, 0.1 ]
+    elements:
+      -
+        type: Transform
+        translation: [ 0, 0, 0.2 ]
+        elements:
+          Shape:
+            geometry:
+              type: Cylinder
+              radius: 0.01
+              height: 0.32
+            appearance: *BodyAppearance
+      -
+        type: Transform
+        translation: [ 0, 0.16, 0.1 ]
+        rotation: [ 1, 0, 0, 90 ]
+        elements:
+          Shape:
+            geometry:
+              type: Cylinder
+              radius: 0.005
+              height: 0.22
+            appearance: *BodyAppearance
+      -
+        type: Transform
+        translation: [ 0, -0.16, 0.1 ]
+        rotation: [ 1, 0, 0, 90 ]
+        elements:
+          Shape:
+            geometry:
+              type: Cylinder
+              radius: 0.005
+              height: 0.22
+            appearance: *BodyAppearance
+

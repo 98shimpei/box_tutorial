@@ -4,9 +4,9 @@
 
 (send *ri* :set-gait-generator-param
            :modify-footsteps nil       ;;着地位置補正を行うと、着地位置がずれてしまうので、環境認識を行わない場合は切る
-           :default-step-height 0.15
-           :default-step-time 1.5
-           :default-double-support-ratio 0.4)
+           :default-step-height 0.15   ;;足上げ高さ
+           :default-step-time 1.5      ;;歩行速度
+           :default-double-support-ratio 0.4) ;;両足支持期間の割合
 
 (lower-waist) ;;腰を下げる
 

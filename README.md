@@ -24,7 +24,7 @@ $ source devel/setup.bash
 
 ## STEP1: まず動かしてみる
 ```bash
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`choreonoid/config/JAXON_RED_RH_BOX.cnoid
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_BOX.cnoid
 ```
 別ウィンドウで
 ```lisp
@@ -45,7 +45,7 @@ choreonoidを起動する
 $ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch
 
 # 既存の環境を使う場合は以下（JAXON_RED_RH_BOX.cnoidの部分を変える）
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`choreonoid/config/JAXON_RED_RH_BOX.cnoid
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_BOX.cnoid
 ```
 ### 画面の見方  
 詳しくはココ！：https://choreonoid.org/ja/manuals/1.7/basics/mainwindow.html
@@ -93,7 +93,7 @@ hrpsysを用いてロボットを動かす場合、一度シミュレーショ�
 
 ### 作成したプロジェクトの実行
 ```bash
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`choreonoid/config/JAXON_RED_RH_hoge.cnoid
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_hoge.cnoid
 ```
 
 ### Tips
@@ -116,7 +116,7 @@ choreonoid/share/modelの下や、rtm-ros-robotics/rtmros_choreonoid/jvrc_models
 
 choreonoidの起動
 ```bash
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`choreonoid/config/JAXON_RED_RH_BOX.cnoid
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_BOX.cnoid
 ```
 別タブでeusの起動
 ```bash
@@ -139,7 +139,7 @@ euslisp/carry_box.lにコメントを詳しく書きました。
 
 choreonoidの起動
 ```bash
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`choreonoid/config/JAXON_RED_RH_TERRAIN.cnoid
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_TERRAIN.cnoid
 ```
 別タブでeusの起動
 ```bash

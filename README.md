@@ -91,7 +91,7 @@ $ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE
 ```
 
 ### Tips
-**ボディファイルの場所**
+**ボディファイルの場所**  
 choreonoid/share/modelの下や、rtm-ros-robotics/rtmros_choreonoid/jvrc_modelsなど。
 
 ## STEP3: bodyファイルを作る
@@ -103,8 +103,52 @@ choreonoid/share/modelの下や、rtm-ros-robotics/rtmros_choreonoid/jvrc_models
 チュートリアルを書こうと思ったけど公式のチュートリアルよりわかりやすくなる気がしないのでサンプルと比べながら公式のものを見てください・・・。
 
 ## STEP4: carry_boxデモ
-euslisp/carry_box.lに詳しく書きました。
+このデモでやること
+- 各関節の動かし方
+- 逆運動学を用いたエンドエフェクタの動かし方
+- インピーダンス制御の使い方
 
-hrpsysの様々なコマンドは https://github.com/start-jsk/rtmros_common/blob/master/hrpsys_ros_bridge/test/hrpsys-samples/README.md を参照
+choreonoidの起動
+```bash
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`choreonoid/config/JAXON_RED_RH_BOX.cnoid
+```
+別タブでeusの起動
+```bash
+$ roscd box_tutorial/euslisp
+$ roseus carry_box.l
+```
+
+euslisp/carry_box.lにコメントを詳しく書きました。
+
+**デモの注意点**  
+- このデモでは、ロボットの手先に凹凸があって、箱を挟んで持つことが難しかったため、箱側に取っ手をつけている。
+- \*ri\*と\*robot\*の違いを理解する。
+- angle-vectorを送ったあとはwait-interpolationで動き終わるのを待つ。
+- インピーダンス制御を行う前にオフセット除去を行う。特に、手のモデルが正しくない場合は、インピーダンス制御を始める直前にオフセット除去すると良い。
+
+## STEP5: terrain_walkingデモ
+このデモでやること
+- 基礎的な歩行パラメータの設定
+- footstepを指定した歩行
+
+choreonoidの起動
+```bash
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`choreonoid/config/JAXON_RED_RH_TERRAIN.cnoid
+```
+別タブでeusの起動
+```bash
+$ roscd box_tutorial/euslisp
+$ roseus terrain_walking.l
+```
+euslisp/terrain_walking.lにコメントを詳しく書きました。
+
+**デモの注意点**  
+- 小椎尾先生のデフォルトの設定では着地位置修正を行うが、環境認識を行わない場合、着地位置がずれると困るので、着地位置修正を無効化しておく。
+- 歩行に関するその他のオプションの設定方法はこちら（初心者は後回しで良い）：https://docs.google.com/presentation/d/1T0ZHgWZ8PXcXvk3VtwDO-1R7qfKsV6HyWswuABzgS-Y/edit#slide=id.g110eb2091ec_0_5
+- 段差を登るとき、膝が伸び切ってしまうと、特異点に陥り足が暴れてバランスを崩すため、膝が伸び切らないように腰を落としておく。
+- footstepsの設定方法は他にもあるので、hrpsys_ros_bridgeのチュートリアルも参考に。
+
+
+**hrpsysの様々なコマンドは https://github.com/start-jsk/rtmros_common/blob/master/hrpsys_ros_bridge/test/hrpsys-samples/README.md を参照**
 
 ※今後更新予定・・・

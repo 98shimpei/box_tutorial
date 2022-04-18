@@ -20,7 +20,7 @@ items:
           plugin: Body
           class: BodyItem
           data: 
-            modelFile: "/home/shimpei/catkin_ws/vision/src/rtm-ros-robotics/rtmros_choreonoid/jvrc_models/JAXON_JVRC/JAXON_JVRCmain_hrpsys_bush.wrl"
+            modelFile: "@jvrc_models_DIR@/JAXON_JVRC/JAXON_JVRCmain_hrpsys_bush.wrl"
             currentBaseLink: "WAIST"
             rootPosition: [ 0, 0, 1.0185 ]
             rootAttitude: [ 
@@ -57,8 +57,8 @@ items:
               data: 
                 isNoDelayMode: true
                 controllerOptions: ""
-                moduleName: "/home/shimpei/catkin_ws/vision/src/rtm-ros-robotics/rtmros_choreonoid/hrpsys_choreonoid/lib/RobotHardware_choreonoid"
-                confFileName: "/home/shimpei/catkin_ws/vision/src/rtm-ros-robotics/rtmros_choreonoid/hrpsys_choreonoid_tutorials/config/BodyRTC_JAXON_RED.RH.conf"
+                moduleName: "@hrpsys_choreonoid_DIR@/lib/RobotHardware_choreonoid"
+                confFileName: "@hrpsys_choreonoid_tutorials_DIR@/config/BodyRTC_JAXON_RED.RH.conf"
                 configurationMode: "Use Configuration File"
                 autoConnect: false
                 instanceName: "JAXON_RED(Robot)0"
@@ -179,19 +179,19 @@ items:
                 antiAliasing: false
         - 
           id: 9
-          name: "table"
+          name: "fixedbox"
           plugin: Body
           class: BodyItem
           data: 
-            modelFile: "/home/shimpei/catkin_ws/vision/src/box_tutorial/choreonoid/models/table.body"
-            currentBaseLink: "body"
-            rootPosition: [ 0, 0.8, 0 ]
+            modelFile: "@box_tutorial_DIR@/choreonoid/models/fixedbox.body"
+            currentBaseLink: "BODY"
+            rootPosition: [ 0, 0.5, 0.05 ]
             rootAttitude: [ 
               1, 0, 0, 
               0, 1, 0, 
               0, 0, 1 ]
             jointPositions: [  ]
-            initialRootPosition: [ 0, 0.8, 0 ]
+            initialRootPosition: [ 0, 0.5, 0.05 ]
             initialRootAttitude: [ 
               1, 0, 0, 
               0, 1, 0, 
@@ -202,34 +202,103 @@ items:
             isEditable: false
         - 
           id: 10
-          name: "box"
+          name: "fixedbox"
           plugin: Body
           class: BodyItem
           data: 
-            modelFile: "/home/shimpei/catkin_ws/vision/src/box_tutorial/choreonoid/models/box.body"
-            currentBaseLink: "body"
-            rootPosition: [ 0, 0.5, 1.12 ]
+            modelFile: "@box_tutorial_DIR@/choreonoid/models/fixedbox.body"
+            currentBaseLink: "BODY"
+            rootPosition: [ 0, 1, 0.15 ]
             rootAttitude: [ 
-              2.22044605e-16, -1, 0, 
-              1, 2.22044605e-16, 0, 
+              1, 0, 0, 
+              0, 1, 0, 
               0, 0, 1 ]
             jointPositions: [  ]
-            initialRootPosition: [ 0, 0.5, 1.12 ]
+            initialRootPosition: [ 0, 1, 0.15 ]
             initialRootAttitude: [ 
-              2.22044605e-16, -1, 0, 
-              1, 2.22044605e-16, 0, 
+              1, 0, 0, 
+              0, 1, 0, 
               0, 0, 1 ]
             zmp: [ 0, 0, 0 ]
             collisionDetection: true
             selfCollisionDetection: false
-            isEditable: true
+            isEditable: false
+        - 
+          id: 11
+          name: "fixedbox"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "@box_tutorial_DIR@/choreonoid/models/fixedbox.body"
+            currentBaseLink: "BODY"
+            rootPosition: [ 0, 1.5, 0.2 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 0.965925826, -0.258819045, 
+              0, 0.258819045, 0.965925826 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 1.5, 0.2 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 0.965925826, -0.258819045, 
+              0, 0.258819045, 0.965925826 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: false
+        - 
+          id: 12
+          name: "fixedbox"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "@box_tutorial_DIR@/choreonoid/models/fixedbox.body"
+            currentBaseLink: "BODY"
+            rootPosition: [ 0, 2, 0.2 ]
+            rootAttitude: [ 
+              1, -0, 0, 
+              0, 0.965925826, 0.258819045, 
+              -0, -0.258819045, 0.965925826 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 2, 0.2 ]
+            initialRootAttitude: [ 
+              1, -0, 0, 
+              0, 0.965925826, 0.258819045, 
+              -0, -0.258819045, 0.965925826 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: false
+        - 
+          id: 13
+          name: "fixedbox"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "@box_tutorial_DIR@/choreonoid/models/fixedbox.body"
+            currentBaseLink: "BODY"
+            rootPosition: [ 0, 2.5, 0.05 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [  ]
+            initialRootPosition: [ 0, 2.5, 0.05 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: false
     - 
-      id: 11
+      id: 14
       name: "ros_service_server.py"
       plugin: Python
       class: PythonScriptItem
       data: 
-        file: "/home/shimpei/catkin_ws/vision/src/rtm-ros-robotics/rtmros_choreonoid/hrpsys_choreonoid/scripts/ros_service_server.py"
+        file: "@hrpsys_choreonoid_DIR@/scripts/ros_service_server.py"
         executionOnLoading: true
         backgroundExecution: false
 views: 
@@ -250,9 +319,8 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      selected: [ 1 ]
-      checked: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
-      expanded: [ 1, 3, 10 ]
+      checked: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
+      expanded: [ 1, 3 ]
   - 
     id: 3
     plugin: Base
@@ -303,9 +371,9 @@ views:
           fieldOfView: 0.6978
           near: 0.01
           far: 100
-          eye: [ -16.7814551, 0.804909114, 7.04189421 ]
-          direction: [ 0.930681408, 0.0502887225, -0.36235778 ]
-          up: [ 0.361829947, 0.0195512294, 0.932039076 ]
+          eye: [ 7.18204241, 1.85004784, 0.68176819 ]
+          direction: [ -0.997321952, 0.0607083602, -0.0407850455 ]
+          up: [ -0.0407096939, 0.0024780551, 0.999167944 ]
         - 
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -345,7 +413,7 @@ views:
       slider: true
       dial: false
       labelOnLeft: true
-      currentBodyItem: 10
+      currentBodyItem: 13
   - 
     id: 8
     plugin: Body
@@ -353,7 +421,7 @@ views:
     mounted: true
     state: 
       listingMode: "Link List"
-      currentBodyItem: 10
+      currentBodyItem: 13
   - 
     id: 9
     plugin: OpenRTM
@@ -378,7 +446,7 @@ toolbars:
     idleLoopDrivenMode: false
     currentTime: 0
     speedScale: 1
-    syncToOngoingUpdates: false
+    syncToOngoingUpdates: true
     autoExpansion: true
   "KinematicsBar": 
     mode: AUTO
@@ -389,7 +457,7 @@ toolbars:
     penetrationBlockDepth: 0.0005
     lazyCollisionDetectionMode: true
   "BodyBar": 
-    current: 10
+    current: 13
   "LeggedBodyBar": 
     stanceWidth: 0.15
   "BodyMotionGenerationBar": 
@@ -447,6 +515,21 @@ Body:
         showZmp: false
       - 
         bodyItem: 10
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 11
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 12
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 13
         showCenterOfMass: false
         showPpcom: false
         showZmp: false

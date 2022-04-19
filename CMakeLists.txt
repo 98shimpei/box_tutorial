@@ -214,3 +214,4 @@ set(hrpsys_choreonoid_tutorials_DIR ${hrpsys_choreonoid_tutorials_SOURCE_PREFIX}
 set(box_tutorial_DIR ${PROJECT_SOURCE_DIR})
 configure_file(${PROJECT_SOURCE_DIR}/choreonoid/config/JAXON_RED_RH_BOX.cnoid.in ${PROJECT_SOURCE_DIR}/choreonoid/config/JAXON_RED_RH_BOX.cnoid @ONLY)
 configure_file(${PROJECT_SOURCE_DIR}/choreonoid/config/JAXON_RED_RH_TERRAIN.cnoid.in ${PROJECT_SOURCE_DIR}/choreonoid/config/JAXON_RED_RH_TERRAIN.cnoid @ONLY)
+configure_file(${PROJECT_SOURCE_DIR}/choreonoid/config/JAXON_RED_RH_VISIONBOX.cnoid.in ${PROJECT_SOURCE_DIR}/choreonoid/config/JAXON_RED_RH_VISIONBOX.cnoid @ONLY)

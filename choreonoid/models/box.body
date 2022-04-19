@@ -7,7 +7,7 @@ links:
   -
     name: body
     jointType: free
-    mass: 0.5  
+    mass: 1.0
     inertia: [
       0.072533, 0,       0,
       0,       0.008533, 0,

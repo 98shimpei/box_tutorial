@@ -62,8 +62,8 @@
       (list
        (float-vector 0 0 0)
        (float-vector 0 0 0)
-       (float-vector 0 -100 -12) ;;rarm
-       (float-vector 0 100  -12) ;;larm
+       (float-vector 0 -100 -5) ;;rarm
+       (float-vector 0 100  -5) ;;larm
        )
        5000)
 (unix:sleep 5)

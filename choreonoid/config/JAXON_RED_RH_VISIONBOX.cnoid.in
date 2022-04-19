@@ -88,7 +88,7 @@ items:
               class: CameraPublisherItem
               data: 
                 cameraName: rs_l515_color_optical_frame
-                imageTopicName: rs_l515/color/image_rect_color
+                imageTopicName: rs_l515/color/image_raw
                 cameraInfoTopicName: rs_l515/color/camera_info
                 frameId: ""
             - 

@@ -13,12 +13,17 @@ https://gitlab.jsk.imi.i.u-tokyo.ac.jp/hiraoka/auto_stabilizer_setup
 - git:
     local-name: box_tutorial
     uri: git@github.com:98shimpei/box_tutorial.git
+- git:
+    local-name: ar_track_alvar
+    uri: git@github.com:98shimpei/ar_track_alvar.git
+    version: shimpei
 ```
 
 ビルド
 ```bash
-$ wstool update
+$ wstool update box_tutorial ar_track_alvar
 $ catkin build box_tutorial
+$ catkin build ar_track_alvar
 $ source devel/setup.bash
 ```
 
@@ -154,6 +159,62 @@ euslisp/terrain_walking.lにコメントを詳しく書きました。
 - 段差を登るとき、膝が伸び切ってしまうと、特異点に陥り足が暴れてバランスを崩すため、膝が伸び切らないように腰を落としておく。
 - footstepsの設定方法は他にもあるので、hrpsys_ros_bridgeのチュートリアルも参考に。
 
+## STEP6: carry_box_visionデモ
+このデモでやること
+- カメラの使い方
+- rvizの使い方
+- ARマーカーの認識
+- euslispでのTFの使い方
+
+choreonoidの起動
+```bash
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_VISIONBOX.cnoid
+```
+別タブでt265ノードの起動
+```bash
+$ roslaunch realsense2_camera rs_t265_simulation.launch
+```
+別タブでrvizの起動
+```bash
+$ rosrun rviz rviz -d $(rospack find jsk_path_planner)/rviz/vision_walking.rviz
+```
+別タブでar_markerノードの起動
+```bash
+$ roslaunch box_tutorial ar_marker_simulation.launch
+```
+別タブでeusの起動
+```bash
+$ roscd box_tutorial/euslisp
+$ roseus carry_box_vision.l
+```
+
+### ARマーカーを貼った箱を作る
+まずはARマーカーを貼った箱を作る。  
+例は choreonoid/models/ar_box1.body を参照。  
+基本と同様に箱を作ったあと、ARマーカーのテクスチャを貼ったパーツを追加する。  
+ARマーカーの画像の作るためには、以下を実行する。
+```bash
+$ roscd box_tutorial/choreonoid/models
+$ rosrun ar_track_alvar createMarker
+$ # 案内に従い、ほしいARマーカーの番号を指定。
+```
+
+### RVIZの使い方
+rvizはできることが色々あるので、JSK演習資料や公式：http://wiki.ros.org/ja/rviz#A.2BMMEw5TD8MMgw6jCiMOs- を参考に。  
+
+画面の簡単な見方(該当部分がない場合は、隠れているので、矢印ボタンを押して表示させる)：
+
+！！工事中！！
+
+### ARマーカーについて
+
+！！工事中！！
+
+### デモの注意点
+- transform-listenerを用いてtfを読む
+- :wait-transformでtfが繋がっているか確認してから、:lookup-transformでtfを受け取る
+- ARマーカーまでのTFを用いて、箱や各手の位置姿勢を計算
+- :translateで平行移動、:rotateで回転移動、:transformで座標系変換（平行＋回転）。詳しくはjmanualを参考に。
 
 **hrpsysの様々なコマンドは https://github.com/start-jsk/rtmros_common/blob/master/hrpsys_ros_bridge/test/hrpsys-samples/README.md を参照**
 

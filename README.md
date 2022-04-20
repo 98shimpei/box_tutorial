@@ -273,6 +273,82 @@ rvizはできることが色々あるので、JSK演習資料や公式：http://
 - ARマーカーまでのTFを用いて、箱や各手の位置姿勢を計算
 - :translateで平行移動、:rotateで回転移動、:transformで座標系変換（平行＋回転）。詳しくはjmanualを参考に。
 
+## STEP7: terrain_walking_with_visionデモ(※開発中につき今後仕様が変わる可能性あり)
+このデモでやること
+- visionを用いた歩行システムの立ち上げ方を知る
+- rosのログのとり方、再生方法を知る
+
+choreonoidの起動
+```bash
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_TERRAIN.cnoid
+```
+別タブでt265ノードの起動
+```bash
+$ roslaunch realsense2_camera rs_t265_simulation.launch
+$ #このノードは（なぜか）エラーが起きやすい。choreonoid立ち上げ後、ロボットの陽動がおさまる（stabilizerが入る）あたりで実行するとうまく行きやすい。
+$ #このノードがずっと立ち上がらない場合はchoreonoidから立ち上げ直す。
+```
+別タブでrvizの起動
+```bash
+$ rosrun rviz rviz -d $(rospack find jsk_path_planner)/rviz/vision_walking.rviz
+```
+別タブで点群ノードの起動
+```bash
+$ roslaunch jsk_path_planner recognize_steppable_region.launch simulation:=true
+```
+別タブで着地可能領域認識ノードの起動
+```bash
+$ roslaunch jsk_path_planner polygon_to_mesh.launch
+```
+別タブでeusの起動
+```bash
+$ roscd box_tutorial/euslisp
+$ roseus terrain_walking_with_vision.l
+```
+### rvizの情報の見方
+![visionrviz](https://user-images.githubusercontent.com/53897559/164168271-e91c5971-e1be-4bef-aaa2-8eec5a43943b.png)
+- ①：点群（PointCloud2）。トピックがいくつかある。
+    - /rs_l515/depth/color/points_low_hz_resized：生点群を5Hzに落としてサイズを減らしたもの
+    - /rt_accumulated_heightmap_pointcloud/output：点群を蓄積し、見てない範囲も推定したもの
+    - /rt_accumulated_heightmap_pointcloud_odomrelative/output：自分の周りだけの点群。着地可能領域計算に用いる。
+- ②：着地可能領域。緑の領域で示されている。三次元的に見えるが実際は二次元。ロボットの足の中心が着地できる場所を表す。
+- ③：目標着地姿勢。水色の矢印で示されている。
+- ④：点群除去領域。水色のボックス。BoundingBoxにチェックを入れると表示されるが、普段は邪魔なので隠している。このボックス内の点群は地形とみなされず無視される。物体を運搬する場合、物体の点群を無視するために大きめに設定する必要がある。src/jsk_path_planner/scripts/object_bbox_publisher.pyで設定している。
+- ⑤：着地可能領域。上下が反転しているので注意・・・直す予定。
+- ⑥：ロボットの視界と着地可能領域を合わせた画像。
+
+### rosのログのとり方、再生のやりかた
+ログを取るには、別タブで以下を起動しておく
+別タブでeusの起動
+```bash
+$ roslaunch jsk_path_planner exp_record.launch bagfile:=file_name.bag
+$ #file_nameの部分を適宜変更する
+```
+なお、記録されるトピックは jsk_path_planner/launch/exp_record.launch 内に設定されている。
+
+取ったログは ~/.ros 以下に保存される。再生方法は以下。
+
+roscoreの起動
+```bash
+$ roscore
+```
+別タブでrvizの起動
+```bash
+$ rosrun rviz rviz -d $(rospack find jsk_path_planner)/rviz/vision_walking.rviz
+```
+別タブでrosbagの起動
+```bash
+$ cd ~/.ros
+$ rosbag play file_name.bag
+$ #file_nameの部分を適宜変更
+$ # -r で再生速度を設定可能。その他いろいろできるので-hで確認しよう。
+```
+
+なお、rviz画面にロボットが表示されない場合、rvizやrosbagを立ち上げる前に、適当なシミュレーションを起動・終了させると、ロボットが表示されるようになる。
+また、一度ログを再生したあと、再度再生したい場合、rvizを再起動しないとTF関係のノードが正しく表示されないので注意。
+
+rosbagに変わるログの再生方法として、rqt_bagもある。こちらはどのトピックを再生するか、どこから再生するかなどをGUIで設定できるが、動作が重い。
+
 **hrpsysの様々なコマンドは https://github.com/start-jsk/rtmros_common/blob/master/hrpsys_ros_bridge/test/hrpsys-samples/README.md を参照**
 
 ※今後更新予定・・・

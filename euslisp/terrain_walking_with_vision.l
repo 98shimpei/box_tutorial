@@ -3,7 +3,7 @@
 (start-footguided-modification)
 
 (send *ri* :set-gait-generator-param
-           :default-step-time 0.7)      ;;歩行速度
+           :default-step-time 1.2)      ;;歩行速度
 
 (lower-waist 100) ;;腰を下げる
 

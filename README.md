@@ -173,6 +173,8 @@ $ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE
 別タブでt265ノードの起動
 ```bash
 $ roslaunch realsense2_camera rs_t265_simulation.launch
+$ #このノードは（なぜか）エラーが起きやすい。choreonoid立ち上げ後、ロボットの陽動がおさまる（stabilizerが入る）あたりで実行するとうまく行きやすい。
+$ #このノードがずっと立ち上がらない場合はchoreonoidから立ち上げ直す。
 ```
 別タブでrvizの起動
 ```bash
@@ -198,17 +200,69 @@ $ roscd box_tutorial/choreonoid/models
 $ rosrun ar_track_alvar createMarker
 $ # 案内に従い、ほしいARマーカーの番号を指定。
 ```
+テクスチャを貼ったパーツを作るには、IndexedFaceSetノードを使用する。  
+とりあえず box_tutorial/choreonoid/models/ar_box1.body をコピペして作ると良い。
 
 ### RVIZの使い方
 rvizはできることが色々あるので、JSK演習資料や公式：http://wiki.ros.org/ja/rviz#A.2BMMEw5TD8MMgw6jCiMOs- を参考に。  
 
-画面の簡単な見方(該当部分がない場合は、隠れているので、矢印ボタンを押して表示させる)：
+よく使う部分のざっくり説明(該当部分がない場合は、隠れているので、矢印ボタンを押して表示させる)：
 
-！！工事中！！
+![rviz_gamen](https://user-images.githubusercontent.com/53897559/164146785-557b9eb1-cd67-4779-8190-f1028be990a8.png)
+
+- ①：モード。基本はインタラクトモードにしておけば良い。
+- ②：表示させるトピックの詳細
+- ③：表示させるトピックの追加
+- ④：メインビュー
+- ⑤：特に便利な「Camera」ディスプレイ。ロボットの視界と、RVIZに表示させている各種マーカーを重ね合わせて表示できる。
+
+メインビューは左ドラッグで回転、shift+左ドラッグまたは中ドラッグで平行移動、ホイールまたは右ドラッグで拡大縮小できる。  
+②の表示させるトピックはチェックボックスで選択可能。また、力センサ等どのトピックを表示させるか切替可能。  
+新しいトピックを表示させるには、③のaddボタンからディスプレイタイプやトピックを選んで表示させる。  
+
+※小椎尾先生のワークスペースを使う場合のみ、global option の FixedFrame は odom_ground にする。その他のワークスペース（jaxon_tutorialなど）はmapにすることが多い。
 
 ### ARマーカーについて
 
-！！工事中！！
+公式ウィキ：http://wiki.ros.org/ar_track_alvar  
+日本語おすすめページ：http://ishi.main.jp/ros/ros_ar_indiv.html
+
+マーカーの大きさなどの情報を事前知識として持っておき、それを用いてマーカーの位置姿勢を認識する。
+認識ノードを起動するlaunchファイルは box_tutorial/launch/ar_marker_simulation.launch においてある。
+
+```xml
+<launch>
+  <arg name="marker_size" default="15.00" />
+  <arg name="max_new_marker_error" default="0.08" />
+  <arg name="max_track_error" default="0.5" />
+
+  <arg name="cam_image_topic" default="/rs_l515/color/image_rect_color" />
+  <arg name="cam_info_topic" default="/rs_l515/color/camera_info" />
+  <arg name="output_frame" default="/rs_l515_color_optical_frame" />
+
+  <node name="ar_track_alvar" pkg="ar_track_alvar" type="individualMarkersNoKinect" respawn="false" output="screen" >
+    <param name="marker_size"           type="double" value="$(arg marker_size)" />
+    <param name="max_new_marker_error"  type="double" value="$(arg max_new_marker_error)" />
+    <param name="max_track_error"       type="double" value="$(arg max_track_error)" />
+    <param name="output_frame"          type="string" value="$(arg output_frame)" />
+    <param name="max_frequency"         type="double" value="30.0" />
+
+    <remap from="camera_image"  to="$(arg cam_image_topic)" />
+    <remap from="camera_info"   to="$(arg cam_info_topic)" />
+  </node>
+ </launch>
+```
+
+各パラメータの意味
+- marker_size:マーカーの大きさ。単位はcm
+- max_new_marker_eror:新しいマーカーを発見するときの許容誤差。あまり変更しなくて良い。
+- max_track_error:マーカーを見続けているときの許容誤差。あまり変更しなくて良い。
+- cam_image_topic:使用する画像トピック名
+- cam_info_topic:使用するカメラ情報のトピック名
+- output_frame:出力するTFの基準座標系。カメラの座標系を書く。
+
+世の中にはその他にもARマーカーがある。AprilTagとかSTagとか。
+
 
 ### デモの注意点
 - transform-listenerを用いてtfを読む

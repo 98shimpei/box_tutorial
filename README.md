@@ -29,7 +29,7 @@ $ source devel/setup.bash
 
 ## STEP1: まず動かしてみる
 ```bash
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_BOX.cnoid
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_FLAT.cnoid
 ```
 別ウィンドウで
 ```lisp
@@ -49,8 +49,8 @@ choreonoidを起動する
 ```bash
 $ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch
 
-# 既存の環境を使う場合は以下（JAXON_RED_RH_BOX.cnoidの部分を変える）
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_BOX.cnoid
+# 既存の環境を使う場合は以下（JAXON_RED_RH_FLAT.cnoidの部分を変える）
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_FLAT.cnoid
 ```
 ### 画面の見方  
 詳しくはココ！：https://choreonoid.org/ja/manuals/1.7/basics/mainwindow.html
@@ -78,6 +78,9 @@ hrpsysを用いてロボットを動かす場合、一度シミュレーショ�
 また、編集モード中にロボットのルートリンクを右クリックすることで、強制移動/強制保持を選ぶことができ、ロボットの位置を強制的に移動させることができる。
 
 ### ボディの読み込み・設定・プロジェクトの保存
+
+※ プロジェクトを指定しないで起動すると、vision対応できていないので、自分で環境を作る場合FLATなどの環境を読み込んでから作ること。
+
 シミュレーションを停止したあと、②のシークバーを端まで動かして初期状態にする。
 
 ファイル>読み込み>ボディ、　catkin_ws/src/box_tutorial/choreonoid/models/box.body

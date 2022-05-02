@@ -12,7 +12,7 @@
 
 (send *ri* :go-pos 1.5 0 0) ;;段差の前まで進む
 
-(send *ri* :set-foot-steps-no-wait
+(send *ri* :set-foot-steps
   (list (make-coords :coords (send *robot* :rleg :end-coords :copy-worldcoords) :name :rleg)
         (make-coords :coords (send (send *robot* :lleg :end-coords :copy-worldcoords) :translate (float-vector 130 0 0  )) :name :lleg)
         (make-coords :coords (send (send *robot* :rleg :end-coords :copy-worldcoords) :translate (float-vector 130 0 0  )) :name :rleg)

@@ -29,7 +29,7 @@ $ source devel/setup.bash
 
 ## STEP1: まず動かしてみる
 ```bash
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_FLAT.cnoid
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/cnoid/JAXON_RED_RH_FLAT.cnoid
 ```
 別ウィンドウで
 ```lisp
@@ -50,7 +50,7 @@ choreonoidを起動する
 $ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch
 
 # 既存の環境を使う場合は以下（JAXON_RED_RH_FLAT.cnoidの部分を変える）
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_FLAT.cnoid
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/cnoid/JAXON_RED_RH_FLAT.cnoid
 ```
 ### 画面の見方  
 詳しくはココ！：https://choreonoid.org/ja/manuals/1.7/basics/mainwindow.html
@@ -83,7 +83,7 @@ hrpsysを用いてロボットを動かす場合、一度シミュレーショ�
 
 シミュレーションを停止したあと、②のシークバーを端まで動かして初期状態にする。
 
-ファイル>読み込み>ボディ、　catkin_ws/src/box_tutorial/choreonoid/models/box.body
+ファイル>読み込み>ボディ、　catkin_ws/src/box_tutorial/models/box.body
 
 ⑥の一番下にboxが出現するので、チェックボックスにチェックを入れる。  
 →　⑧の画面に黄色い箱が出現する。
@@ -101,7 +101,7 @@ hrpsysを用いてロボットを動かす場合、一度シミュレーショ�
 
 ### 作成したプロジェクトの実行
 ```bash
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_hoge.cnoid
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/cnoid/JAXON_RED_RH_hoge.cnoid
 ```
 
 ### Tips
@@ -124,7 +124,7 @@ choreonoid/share/modelの下や、rtm-ros-robotics/rtmros_choreonoid/jvrc_models
 
 choreonoidの起動
 ```bash
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_BOX.cnoid
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/cnoid/JAXON_RED_RH_BOX.cnoid
 ```
 別タブでeusの起動
 ```bash
@@ -147,7 +147,7 @@ euslisp/carry_box.lにコメントを詳しく書きました。
 
 choreonoidの起動
 ```bash
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_TERRAIN.cnoid
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/cnoid/JAXON_RED_RH_TERRAIN.cnoid
 ```
 別タブでeusの起動
 ```bash
@@ -171,7 +171,7 @@ euslisp/terrain_walking.lにコメントを詳しく書きました。
 
 choreonoidの起動
 ```bash
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_VISIONBOX.cnoid
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/cnoid/JAXON_RED_RH_VISIONBOX.cnoid
 ```
 別タブでt265ノードの起動
 ```bash
@@ -195,16 +195,16 @@ $ roseus carry_box_vision.l
 
 ### ARマーカーを貼った箱を作る
 まずはARマーカーを貼った箱を作る。  
-例は choreonoid/models/ar_box1.body を参照。  
+例は models/ar_box1.body を参照。  
 基本と同様に箱を作ったあと、ARマーカーのテクスチャを貼ったパーツを追加する。  
 ARマーカーの画像の作るためには、以下を実行する。
 ```bash
-$ roscd box_tutorial/choreonoid/models
+$ roscd box_tutorial/models
 $ rosrun ar_track_alvar createMarker
 $ # 案内に従い、ほしいARマーカーの番号を指定。
 ```
 テクスチャを貼ったパーツを作るには、IndexedFaceSetノードを使用する。  
-とりあえず box_tutorial/choreonoid/models/ar_box1.body をコピペして作ると良い。
+とりあえず box_tutorial/models/ar_box1.body をコピペして作ると良い。
 
 ### RVIZの使い方
 rvizはできることが色々あるので、JSK演習資料や公式：http://wiki.ros.org/ja/rviz#A.2BMMEw5TD8MMgw6jCiMOs- を参考に。  
@@ -280,7 +280,7 @@ rvizはできることが色々あるので、JSK演習資料や公式：http://
 
 choreonoidの起動
 ```bash
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/choreonoid/config/JAXON_RED_RH_TERRAIN.cnoid
+$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/cnoid/JAXON_RED_RH_TERRAIN.cnoid
 ```
 別タブでt265ノードの起動
 ```bash

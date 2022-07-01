@@ -1,5 +1,6 @@
 ;; 最初のおまじない群
 (load "package://push-recovery/push-recovery-foot-guided.l") ;;小椎尾先生の設定を使うためのロード
+(load "package://control_tools/play-hrpsysfile.l");; ログを取るためのロード
 (robots-init "jaxon_red") ;;jaxon_red用の設定
 (start-footguided-modification) ;;小椎尾先生の着地位置修正の設定
 (objects (list *robot*)) ;;irt-viewerにロボットを表示

@@ -17,13 +17,19 @@ https://gitlab.jsk.imi.i.u-tokyo.ac.jp/hiraoka/auto_stabilizer_setup
     local-name: ar_track_alvar
     uri: git@github.com:98shimpei/ar_track_alvar.git
     version: shimpei
+- git:
+    local-name: control_tools
+    uri: git@github.com:kindsenior/control_tools.git
+- git:
+    local-name: log_plotter
+    uri: git@github.com:YutaKojio/log_plotter.git
 ```
 
 ビルド
 ```bash
 $ wstool update box_tutorial ar_track_alvar
 $ catkin build box_tutorial
-$ catkin build ar_track_alvar
+$ catkin build ar_track_alvar control_tools log_plotter
 $ source devel/setup.bash
 ```
 
@@ -277,6 +283,7 @@ rvizはできることが色々あるので、JSK演習資料や公式：http://
 このデモでやること
 - visionを用いた歩行システムの立ち上げ方を知る
 - rosのログのとり方、再生方法を知る
+- hrpsysのログのとり方、描画方法を知る
 
 choreonoidの起動
 ```bash
@@ -348,6 +355,29 @@ $ # -r で再生速度を設定可能。その他いろいろできるので-h�
 また、一度ログを再生したあと、再度再生したい場合、rvizを再起動しないとTF関係のノードが正しく表示されないので注意。
 
 rosbagに変わるログの再生方法として、rqt_bagもある。こちらはどのトピックを再生するか、どこから再生するかなどをGUIで設定できるが、動作が重い。
+
+### hrpsysのログのとり方、グラフ描画方法
+hrpsysのログを取るには、eus上で以下を行う
+
+```lisp
+(send *ri* :start-log) ;;ログ取り開始（正しくは、現在まで取っているログのリセット）
+
+(send *ri* :save-log "保存場所の絶対パス") ;;ログ出力
+(save-log) ;;小島さんのスクリプトを読み込んでいる場合、このコマンドでもログ出力可能（ログの名前もあとから設定可能）
+```
+
+グラフ描画方法は以下
+
+ログを取った場所を開き、どのログでも良いので右クリック-> scripts -> plot.sh
+
+plot.yaml, layout.yamlを指定。plot.yamlはグラフ描画の関数を指定しており、layout.yamlはグラフのレイアウトを指定している。
+
+グラフ画面。各軸ホイールを回すことで拡大・縮小可能。!!!ログが長い場合重く、反映が遅いので注意!!!
+
+右クリックから様々な設定ができる。個人的によく使うのは以下。
+- X,Y Axis: 横軸・縦軸の表示範囲を設定できる
+- Hide: 必要ないグラフを隠せる。
+- export: グラフをpngやsvg等で保存できる
 
 **hrpsysの様々なコマンドは https://github.com/start-jsk/rtmros_common/blob/master/hrpsys_ros_bridge/test/hrpsys-samples/README.md を参照**
 

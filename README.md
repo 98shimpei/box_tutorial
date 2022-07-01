@@ -27,7 +27,7 @@ https://gitlab.jsk.imi.i.u-tokyo.ac.jp/hiraoka/auto_stabilizer_setup
 
 ビルド
 ```bash
-$ wstool update box_tutorial ar_track_alvar
+$ wstool update box_tutorial ar_track_alvar control_tools log_plotter
 $ catkin build box_tutorial
 $ catkin build ar_track_alvar control_tools log_plotter
 $ source devel/setup.bash
@@ -370,7 +370,11 @@ hrpsysのログを取るには、eus上で以下を行う
 
 ログを取った場所を開き、どのログでも良いので右クリック-> scripts -> plot.sh
 
+![Screenshot from 2022-07-01 18-21-49](https://user-images.githubusercontent.com/53897559/176868516-d63bd60d-0dc0-427e-a72c-38b33570488f.png)
+
 plot.yaml, layout.yamlを指定。plot.yamlはグラフ描画の関数を指定しており、layout.yamlはグラフのレイアウトを指定している。
+
+![Screenshot from 2022-07-01 18-25-27](https://user-images.githubusercontent.com/53897559/176868560-42bd90c3-d953-42d2-acb6-80cceb1ca115.png)
 
 グラフ画面。各軸ホイールを回すことで拡大・縮小可能。!!!ログが長い場合重く、反映が遅いので注意!!!
 

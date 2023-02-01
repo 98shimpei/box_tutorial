@@ -55,18 +55,24 @@
   <build_depend>jvrc_models</build_depend>
   <build_depend>hrpsys_choreonoid</build_depend>
   <build_depend>hrpsys_choreonoid_tutorials</build_depend>
+  <build_depend>msl_hand_models</build_depend>
+  <build_depend>msl_hand_controller</build_depend>
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>rospy</build_export_depend>
   <build_export_depend>std_msgs</build_export_depend>
   <build_export_depend>jvrc_models</build_export_depend>
   <build_export_depend>hrpsys_choreonoid</build_export_depend>
   <build_export_depend>hrpsys_choreonoid_tutorials</build_export_depend>
+  <build_export_depend>msl_hand_models</build_export_depend>
+  <build_export_depend>msl_hand_controller</build_export_depend>
   <exec_depend>roscpp</exec_depend>
   <exec_depend>rospy</exec_depend>
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>jvrc_models</exec_depend>
   <exec_depend>hrpsys_choreonoid</exec_depend>
   <exec_depend>hrpsys_choreonoid_tutorials</exec_depend>
+  <exec_depend>msl_hand_models</exec_depend>
+  <exec_depend>msl_hand_controller</exec_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->

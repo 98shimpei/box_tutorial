@@ -12,6 +12,8 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   jvrc_models
+  msl_hand_models
+  msl_hand_controller
   hrpsys_choreonoid
   hrpsys_choreonoid_tutorials
 )
@@ -211,8 +213,12 @@ include_directories(
 set(jvrc_models_DIR ${jvrc_models_SOURCE_PREFIX})
 set(hrpsys_choreonoid_DIR ${hrpsys_choreonoid_SOURCE_PREFIX})
 set(hrpsys_choreonoid_tutorials_DIR ${hrpsys_choreonoid_tutorials_SOURCE_PREFIX})
+set(msl_hand_models_DIR ${msl_hand_models_SOURCE_PREFIX})
+set(msl_hand_controller_DIR ${msl_hand_controller_SOURCE_PREFIX})
 set(box_tutorial_DIR ${PROJECT_SOURCE_DIR})
 configure_file(${PROJECT_SOURCE_DIR}/cnoid/JAXON_RED_RH_FLAT.cnoid.in ${PROJECT_SOURCE_DIR}/cnoid/JAXON_RED_RH_FLAT.cnoid @ONLY)
 configure_file(${PROJECT_SOURCE_DIR}/cnoid/JAXON_RED_RH_BOX.cnoid.in ${PROJECT_SOURCE_DIR}/cnoid/JAXON_RED_RH_BOX.cnoid @ONLY)
 configure_file(${PROJECT_SOURCE_DIR}/cnoid/JAXON_RED_RH_TERRAIN.cnoid.in ${PROJECT_SOURCE_DIR}/cnoid/JAXON_RED_RH_TERRAIN.cnoid @ONLY)
 configure_file(${PROJECT_SOURCE_DIR}/cnoid/JAXON_RED_RH_VISIONBOX.cnoid.in ${PROJECT_SOURCE_DIR}/cnoid/JAXON_RED_RH_VISIONBOX.cnoid @ONLY)
+configure_file(${PROJECT_SOURCE_DIR}/cnoid/JAXON_RED_WITH_MSLHAND_FLAT.cnoid.in ${PROJECT_SOURCE_DIR}/cnoid/JAXON_RED_WITH_MSLHAND_FLAT.cnoid @ONLY)
+configure_file(${PROJECT_SOURCE_DIR}/cnoid/JAXON_RED_WITH_MSLHAND_BOX.cnoid.in ${PROJECT_SOURCE_DIR}/cnoid/JAXON_RED_WITH_MSLHAND_BOX.cnoid @ONLY)

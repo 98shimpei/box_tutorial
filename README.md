@@ -1,51 +1,49 @@
 ## STEP0: 環境構築
 
-### 小椎尾先生のワークスペース
+### 平岡さんのワークスペース
 
-https://gitlab.jsk.imi.i.u-tokyo.ac.jp/hiraoka/auto_stabilizer_setup
+以下の平岡さんのワークスペースを環境構築。ただし、.rosinstallはこのディレクトリの.rosinstallを使用すること！！
 
-この内visionありを環境構築する。 catkin_ws/ を catkin_ws/"ワークスペースの名前"/ に読み替えること。
+https://gitlab.jsk.imi.i.u-tokyo.ac.jp/hiraoka/auto_stabilizer_config/-/tree/master/auto_stabilizer_config
+
+catkin_ws/ を catkin_ws/"ワークスペースの名前"/ に読み替えること。
 
 ### box_tutorial用環境構築
 
-.rosinstallに以下を追記
-```yaml
-- git:
-    local-name: box_tutorial
-    uri: git@github.com:98shimpei/box_tutorial.git
-- git:
-    local-name: ar_track_alvar
-    uri: git@github.com:98shimpei/ar_track_alvar.git
-    version: shimpei
-- git:
-    local-name: control_tools
-    uri: git@github.com:kindsenior/control_tools.git
-- git:
-    local-name: log_plotter
-    uri: git@github.com:YutaKojio/log_plotter.git
-```
-
 ビルド
 ```bash
-$ wstool update box_tutorial ar_track_alvar control_tools log_plotter
 $ catkin build box_tutorial
 $ catkin build ar_track_alvar control_tools log_plotter
 $ source devel/setup.bash
 ```
+また、auto_stabilizer_config/scripts/start-jaxon_red_with_mslhand-sim.sh内の、SOURCE_SCRIPTを必要に応じて変更しておくこと。
 
 ## STEP1: まず動かしてみる
 ```bash
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/cnoid/JAXON_RED_RH_FLAT.cnoid
+$ rosrun auto_stabilizer_config start-jaxon_red_with_mslhand-sim.sh
+$ byobu
 ```
-別ウィンドウで
+byobuは複数のシェル環境を同時に起動して切り替えるツール。
+
+F3,F4でタブ移動でき、F2で新しいタブを生成できる。F6でシェルの状態を維持したままデタッチでき、再度byobuと打つことで入り直すことができる。
+
+5番タブに移動し、以下を一行ずつ実行することで歩行させることができる。
 ```lisp
-$ roseus
-(load "package://push-recovery/push-recovery-foot-guided.l")
-(robots-init "jaxon_red")
-(start-footguided-modification)
-(send *ri* :go-pos 1 0 0)
-(send *ri* :go-velocity 0 0 0)
+$ roseus euslisp/simple_start.l
+(send *ri* :go-pos 1 0 0) //1m歩く
+(send *ri* :go-velocity 0 0 0) //その場で歩き続ける
+(send *ri* :go-stop) //歩くのをやめる
 ```
+
+その他のタブの詳細は以下
+```bash
+1番: roscore立ち上げ
+2番: ネームサーバ立ち上げ
+3番: choreonoid立ち上げ
+4番: hrpsys,hrpsys_ros_bridge立ち上げ
+5番: roseus立ち上げ用
+```
+
 ## STEP2: choreonoidでシミュレーション環境を作る
 参考：  
 　choreonoidのtankチュートリアル ： https://choreonoid.org/ja/manuals/1.7/simulation/tank-tutorial/index.html  
@@ -53,10 +51,10 @@ $ roseus
 
 choreonoidを起動する
 ```bash
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch
+$ roslaunch auto_stabilizer_config choreonoid_JAXON_RED_WITH_MSLHAND.launch
 
-# 既存の環境を使う場合は以下（JAXON_RED_RH_FLAT.cnoidの部分を変える）
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/cnoid/JAXON_RED_RH_FLAT.cnoid
+# 既存の環境を使う場合は以下（JAXON_RED_WITH_MSLHAND_FLAT.cnoidの部分を変える）
+$ roslaunch auto_stabilizer_config choreonoid_JAXON_RED_WITH_MSLHAND.launch PROJECT_FILE:=`rospack find box_tutorial`/cnoid/JAXON_RED_WITH_MSLHAND_FLAT.cnoid
 ```
 ### 画面の見方  
 詳しくはココ！：https://choreonoid.org/ja/manuals/1.7/basics/mainwindow.html
@@ -102,12 +100,12 @@ hrpsysを用いてロボットを動かす場合、一度シミュレーショ�
 ⑥のworldを選択してから④を押して現在のワールドを初期状態に設定する。  
 →　⑧に設定できた感じの文章が流れる
 
-ファイル＞名前をつけてプロジェクトを保存、　catkin_ws/src/box_tutorial/choreonoi/config/JAXON_RED_RH_hoge.cnoid  
+ファイル＞名前をつけてプロジェクトを保存、　catkin_ws/src/box_tutorial/choreonoi/config/JAXON_RED_WITH_MSLHAND_hoge.cnoid  
 ※ hogeの部分を適宜変更。
 
 ### 作成したプロジェクトの実行
 ```bash
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/cnoid/JAXON_RED_RH_hoge.cnoid
+$ roslaunch auto_stabilizer_config choreonoid_JAXON_RED_WITH_MSLHAND.launch PROJECT_FILE:=`rospack find box_tutorial`/cnoid/JAXON_RED_WITH_MSLHAND_hoge.cnoid
 ```
 
 ### Tips
@@ -130,10 +128,13 @@ choreonoid/share/modelの下や、rtm-ros-robotics/rtmros_choreonoid/jvrc_models
 
 choreonoidの起動
 ```bash
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/cnoid/JAXON_RED_RH_BOX.cnoid
-```
-別タブでeusの起動
-```bash
+#3番タブにて
+$ roslaunch auto_stabilizer_config choreonoid_JAXON_RED_WITH_MSLHAND.launch PROJECT_FILE:=`rospack find box_tutorial`/cnoid/JAXON_RED_WITH_MSLHAND_BOX.cnoid
+
+#4番タブ起動
+rossetlocal && rossetip && sato_hikitugi-source && roslaunch auto_stabilizer_config hrpsys_JAXON_RED_WITH_MSLHAND.launch
+
+#5番タブにて
 $ roscd box_tutorial/euslisp
 $ roseus carry_box.l
 ```
@@ -141,7 +142,6 @@ $ roseus carry_box.l
 euslisp/carry_box.lにコメントを詳しく書きました。
 
 **デモの注意点**  
-- このデモでは、ロボットの手先に凹凸があって、箱を挟んで持つことが難しかったため、箱側に取っ手をつけている。
 - \*ri\*と\*robot\*の違いを理解する。
 - angle-vectorを送ったあとはwait-interpolationで動き終わるのを待つ。
 - インピーダンス制御を行う前にオフセット除去を行う。特に、手のモデルが正しくない場合は、インピーダンス制御を始める直前にオフセット除去すると良い。

@@ -1,0 +1,141 @@
+# auto_stabilizerのために必要
+- git:
+    uri: git@github.com:Naoki-Hiraoka/auto_stabilizer
+    local-name: auto_stabilizer
+- git:
+    uri: git@github.com:kindsenior/hrpsys-base
+    local-name: hrpsys
+    version: current-torque-control
+- git:
+    uri: git@github.com:Naoki-Hiraoka/rtmbuild2
+    local-name: rtmbuild2
+- git:
+    uri: git@github.com:Naoki-Hiraoka/choreonoid
+    local-name: choreonoid
+    version: PR-faster-than-realtime # git@discourse.choreonoid.org/t/simulatoritem/479/4 choreonoid1.8が使えるならこのブランチは不要
+- git:
+    uri: git@github.com:Naoki-Hiraoka/cpp_filters
+    local-name: cpp_filters
+- git:
+    uri: git@github.com:Naoki-Hiraoka/ik_solvers
+    local-name: ik_solvers
+- git:
+    uri: git@github.com:Naoki-Hiraoka/abseil_catkin.git
+    local-name: abseil_catkin
+- git:
+    uri: git@github.com:Naoki-Hiraoka/qp_solvers
+    local-name: qp_solvers
+- git:
+    uri: git@github.com:Naoki-Hiraoka/prioritized_qp
+    local-name: prioritized_qp
+- git:
+    uri: git@github.com:Naoki-Hiraoka/joint_limit_table
+    local-name: joint_limit_table
+- git:
+    uri: git@github.com:fkanehiro/openhrp3
+    local-name: openhrp3
+- git:
+    uri: git@github.com:Naoki-Hiraoka/collision_checker_rtc
+    local-name: collision_checker_rtc
+- git:
+    local-name: collision_check_libraries
+    uri: git@github.com:Naoki-Hiraoka/collision_check_libraries.git
+- git:
+    local-name: qhulleigen
+    uri: git@github.com:Naoki-Hiraoka/qhulleigen.git
+- git:
+    local-name: choreonoid_collision_tools
+    uri: git@github.com:Naoki-Hiraoka/choreonoid_collision_tools.git
+- git:
+    local-name: rtmros_msg_bridge
+    uri: git@github.com:Naoki-Hiraoka/rtmros_msg_bridge.git
+
+# handのために必要
+- git:
+    local-name: rtm-ros-robotics/rtmros_common
+    uri: git@github.com:Naoki-Hiraoka/rtmros_common.git
+    version: hrp2_with_3hand
+- git:
+    local-name: jsk-ros-pkg/jsk_model_tools
+    uri: git@github.com:Naoki-Hiraoka/jsk_model_tools.git
+    version: PR-custom-limb
+- git:
+    local-name: rhp3hand_robot
+    uri: git@gitlab.jsk.imi.i.u-tokyo.ac.jp:hiraoka/rhp3hand_robot.git
+- git:
+    local-name: dynamixel_hand
+    uri: git@github.com:Utaro-M/dynamixel_hand.git
+- git:
+    local-name: msl_hand_controller
+    uri: git@gitlab.jsk.imi.i.u-tokyo.ac.jp:hiraoka/msl_hand_controller.git
+    version: PR-update
+
+# いつもの
+- git:
+    local-name: rtm-ros-robotics/rtmros_hrp2
+    uri: git@github.com:start-jsk/rtmros_hrp2.git
+- git:
+    local-name: jsk-ros-pkg/trans_system
+    uri: git@github.com:Naoki-Hiraoka/trans_system.git
+    version: PR-close-iob-shm
+- git: # hrpsys_ros_bridge_tutorialsのmake-joint-min-max-table.lしか使ってない
+    local-name: rtm-ros-robotics/rtmros_tutorials
+    uri: git@github.com:start-jsk/rtmros_tutorials.git
+- git:
+    local-name: multisense
+    # This repository depends on multisense_ros 3.4.9. We are using forked repository because 3.4.9 fails building on melodic. If git@github.com:start-jsk/rtmros_hrp2/issues/557 is solved, you will use origin/master repository.
+    uri: git@github.com:Naoki-Hiraoka/multisense_ros
+    version: 3.4.9_fixed
+
+# SoftErrorLimiterのために必要
+- git:
+    local-name: hrpsys_ext_rtc
+    uri: git@github.com:Naoki-Hiraoka/hrpsys_ext_rtc.git
+
+# rtcloaderのために必要
+- git:
+    local-name: execution_context_shmtime
+    uri: git@github.com:Naoki-Hiraoka/execution_context_shmtime.git
+- git:
+    local-name: rtcloader
+    uri: git@github.com:Naoki-Hiraoka/rtcloader.git
+
+# choreonoidのために必要
+- git: # hrpsys_choreonoidのadd_object.pyと、hrpsys_choreonoid_tutorialsのfloor.yamlしか使ってない. chorenoidのOpenRTMPluginは必要ない
+    uri: git@github.com:start-jsk/rtmros_choreonoid
+    local-name: rtm-ros-robotics/rtmros_choreonoid
+- git:
+    local-name: choreonoid_ros_ext_plugin
+    uri: git@github.com:Naoki-Hiraoka/choreonoid_ros_ext_plugin.git
+- git:
+    local-name: choreonoid_bridge_shm
+    uri: git@gitlab.jsk.imi.i.u-tokyo.ac.jp:hiraoka/choreonoid_bridge_shm.git
+
+- git:
+    local-name: auto_stabilizer_config
+    uri: git@gitlab.jsk.imi.i.u-tokyo.ac.jp:hiraoka/auto_stabilizer_config.git
+- git:
+    local-name: box_tutorial
+    uri: git@github.com:98shimpei/box_tutorial.git
+- git:
+    local-name: ar_track_alvar
+    uri: git@github.com:98shimpei/ar_track_alvar.git
+    version: shimpei
+- git:
+    local-name: control_tools
+    uri: git@github.com:kindsenior/control_tools.git
+- git:
+    local-name: log_plotter
+    uri: git@github.com:YutaKojio/log_plotter.git
+- git:
+    local-name: jsk_path_planner
+    uri: git@github.com:98shimpei/jsk_path_planner.git
+    version: shimpei-master
+- git:
+    local-name: safe_footstep_planner
+    uri: git@github.com:98shimpei/safe_footstep_planner.git
+    version: jaxonred_st_region
+- git:
+    local-name: jsk-ros-pkg/jsk_robot
+    uri: git@github.com:98shimpei/jsk_robot.git
+    version: auto-stabilizer

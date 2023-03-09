@@ -1,0 +1,10 @@
+- git:
+    local-name: geometry2
+    uri: git@github.com:ros/geometry2
+    version: 0.6.5
+- git:
+    local-name: ros_numpy
+    uri: git@github.com:eric-wieser/ros_numpy.git
+- git:
+    local-name: terrain_recognition
+    uri: git@github.com:98shimpei/terrain_recognition.git

@@ -6,3 +6,12 @@
 (send *robot* :reset-pose)
 (send *ri* :start-auto-balancer)
 (send *ri* :start-st)
+(defun lower-waist
+  (&optional (dz 60) (tm 5000))
+  (send *robot* :reset-pose)
+  (send *robot* :fix-leg-to-coords (make-coords))
+  (send *robot* :legs :move-end-pos (float-vector 0 0 dz))
+  (send *robot* :move-centroid-on-foot :both '(:rleg :lleg))
+  (send *ri* :angle-vector (send *robot* :angle-vector) tm)
+  (send *ri* :wait-interpolation)
+  )

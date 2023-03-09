@@ -1,7 +1,7 @@
-(load "package://push-recovery/push-recovery-foot-guided.l")
-(load "package://control_tools/play-hrpsysfile.l")
-(robots-init "jaxon_red")
-(start-footguided-modification)
+;; 最初のおまじない群
+(load "package://box_tutorial/euslisp/simple_start.l");; 起動スクリプト呼び出し
+(objects (list *robot*)) ;;irt-viewerにロボットを表示
+(send *robot* :fix-leg-to-coords (make-coords)) ;; *robot*の座標系を両足平の真ん中に移動
 
 (setq *tfl* (instance ros::transform-listener :init)) ;; tfを使う準備
 (setq target-frame "ar_marker_1") ;; ターゲットのフレーム名を設定

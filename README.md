@@ -147,6 +147,7 @@ euslisp/carry_box.lにコメントを詳しく書きました。
 - インピーダンス制御を行う前にオフセット除去を行う。特に、手のモデルが正しくない場合は、インピーダンス制御を始める直前にオフセット除去すると良い。
 
 ## STEP5: terrain_walkingデモ
+**このステップは工事中**
 このデモでやること
 - 基礎的な歩行パラメータの設定
 - footstepを指定した歩行
@@ -169,6 +170,7 @@ euslisp/terrain_walking.lにコメントを詳しく書きました。
 - footstepsの設定方法は他にもあるので、hrpsys_ros_bridgeのチュートリアルも参考に。
 
 ## STEP6: carry_box_visionデモ
+**このステップは工事中**
 このデモでやること
 - カメラの使い方
 - rvizの使い方
@@ -279,39 +281,77 @@ rvizはできることが色々あるので、JSK演習資料や公式：http://
 - ARマーカーまでのTFを用いて、箱や各手の位置姿勢を計算
 - :translateで平行移動、:rotateで回転移動、:transformで座標系変換（平行＋回転）。詳しくはjmanualを参考に。
 
-## STEP7: terrain_walking_with_visionデモ(※開発中につき今後仕様が変わる可能性あり)
+## STEP7: sato版terrain_walking_with_visionデモ
 このデモでやること
-- visionを用いた歩行システムの立ち上げ方を知る
+- sato版のvisionを用いた歩行システムの環境構築・立ち上げ方を知る
 - rosのログのとり方、再生方法を知る
 - hrpsysのログのとり方、描画方法を知る
+- 各種ツールの使い方
 
-choreonoidの起動
+###地形認識システム概要###
+このシステムは、不整地歩行での地形認識のために、環境点群をHeightmapに変換し、ニューラルネットに通すことで着地可能領域及び着地高さ・姿勢画像に変換し、着地位置姿勢を決めている。
+
+###vision環境構築(ubuntu18.04)###
+python3を使うため、別のワークスペースを用意する必要がある（がんばれば一つのワークスペースでもできるかも）。
+このディレクトリの.rosinstall_visionを使ってもう一つワークスペースを構築する。
+
+**tensorflowのCPU版を使っているので、手元でやるときはGPU版使うと早くなりそう（結局やってない）**
+
+package.xmlを書くのをサボっていたので、多少抜けが有るかも・・・。
 ```bash
-$ rtmlaunch hrpsys_choreonoid_tutorials jaxon_red_choreonoid.launch PROJECT_FILE:=`rospack find box_tutorial`/cnoid/JAXON_RED_RH_TERRAIN.cnoid
+#各種インストール
+$ sudo apt install python3-pip python3
+$ pip3 install -upgrade pip
+$ pip3 install rospkg catkin_pkg empy
+$ pip3 install tensorflow
+$ pip3 install opencv-python
+$ echo "export TF_CPP_MIN_LOG_LEVEL=2" >> ~/.bashrc
+
+#poly2triのインストール ※よりよい方法求む
+#以下をクローンする場所はどこでも良い（後で消して良い）
+$ git clone git@github.com:davidcarne/poly2tri.python.git
+$ cd poly2tri.python
+$ python3 setup.py build_ext -i
+$ cp p2t.cpython-36m-x86_64-linux-gnu.so ~/.local/lib/python3.6/site-packages/. #python3のバージョンにより多少変わる?
+
+#ワークスペースのビルドコマンド
+$ catkin build -DPYTHON_EXECUTABLE=/usr/bin/python3 -DPYTHON_INCLUDE_DIR=/usr/include/python3.6m -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.6m.so
 ```
-別タブでt265ノードの起動
+
+
+###シミュレーションの実行方法###
+
+```bash
+#3番タブにて
+$ roslaunch auto_stabilizer_config choreonoid_JAXON_RED_WITH_MSLHAND.launch PROJECT_FILE:=`rospack find box_tutorial`/cnoid/JAXON_RED_WITH_MSLHAND_TERRAIN.cnoid
+
+#4番タブ起動
+$ rossetlocal && rossetip && sato_hikitugi-source && roslaunch auto_stabilizer_config hrpsys_JAXON_RED_WITH_MSLHAND.launch
+
+#5番タブにて
+$ roscd box_tutorial/euslisp
+$ roseus simple_start.l
+$ (lower-waist 120)
+
+#6番タブにて (点群をHeightmapに変換)
+$ roslaunch jsk_path_planner recognize_terrain.launch simulation:=true
+
+#7番タブにて（Heightmapを着地可能領域・高さ姿勢に変換）
+$ #先程作成したvision用ワークスペースをsourceする
+$ roslaunch terrain_recognition steppable_region.launch
+
+#8番タブにて（rviz起動）
+$ rosrun rviz rviz -d $(rospack find box_tutorial)/rviz/vision_walking.rviz
+
+#もしt265を使う場合は別タブで以下のコマンドを使用（シミュレーション時）
 ```bash
 $ roslaunch realsense2_camera rs_t265_simulation.launch
 $ #このノードは（なぜか）エラーが起きやすい。choreonoid立ち上げ後、ロボットの陽動がおさまる（stabilizerが入る）あたりで実行するとうまく行きやすい。
 $ #このノードがずっと立ち上がらない場合はchoreonoidから立ち上げ直す。
 ```
-別タブでrvizの起動
-```bash
-$ rosrun rviz rviz -d $(rospack find jsk_path_planner)/rviz/vision_walking.rviz
-```
-別タブで点群ノードの起動
-```bash
-$ roslaunch jsk_path_planner recognize_steppable_region.launch simulation:=true
-```
-別タブで着地可能領域認識ノードの起動
-```bash
-$ roslaunch jsk_path_planner polygon_to_mesh.launch
-```
-別タブでeusの起動
-```bash
-$ roscd box_tutorial/euslisp
-$ roseus terrain_walking_with_vision.l
-```
+
+この後、5番タブでgoposなりgovelなりをすると良い
+
 ### rvizの情報の見方
 ![visionrviz](https://user-images.githubusercontent.com/53897559/164168271-e91c5971-e1be-4bef-aaa2-8eec5a43943b.png)
 - ①：点群（PointCloud2）。トピックがいくつかある。
@@ -384,5 +424,36 @@ plot.yaml, layout.yamlを指定。plot.yamlはグラフ描画の関数を指定�
 - export: グラフをpngやsvg等で保存できる
 
 **hrpsysの様々なコマンドは https://github.com/start-jsk/rtmros_common/blob/master/hrpsys_ros_bridge/test/hrpsys-samples/README.md を参照**
+
+### 各種ツールの使い方
+本システムでは、学習によってHeightmapから着地可能領域、着地高さ姿勢画像の変換を行っている。
+学習に用いる地形データはランダムに生成しており、教師データは３次元凸包計算により生成している。
+学習のさせ方は以下の通り。(すべてvisionワークスペース)
+いろいろサボっているのでrosrunでは動かないと思う。
+
+```bash
+#学習データ作成
+$ roscd terrain_recognition/scripts
+$ ./rm_generate_terrains.sh #生成済みの学習用データを消す。
+
+#地形データ＆教師データ生成。引数は生成データ数で、2000ぐらいがよい
+$ #./generate 生成数
+$ ./generate 2000
+
+#着地可能領域学習。データ数は200000程度、epoch数は5~10程度で何回か繰り返す。３つ目の引数は、f:学習するかどうか、w:既存の重みをロードするかどうか、v:デバッグ用出力を表示するかどうか、を表す。
+$ #./real_steppable_region_learning.py 生成データ数 epoch数 f/w/v
+$ ./real_steppable_region_learning.py 200000 10 fv
+
+#着地高さ姿勢学習。同じくデータ数は200000程度、epoch数は10程度を何回か繰り返す。
+$ #./real_pose_height_learning.py 生成データ数 epoch数 f/w/v
+$ ./real_pose_height_learning.py 200000 10 fv
+
+#確認＆地形データ追加用コマンド。特定の点をクリックすると、rvizに着地高さ姿勢と、着地可能性の認識結果（赤or緑）が表示される。その他、手動アノテーションしたデータを追加するときにも使う。追加されたデータはファイル名＋日付の名前で保存される。
+$ ./save_surface 保存ファイル名
+$ #点選択+oを押すことで着地可能とアノテーション、xを押すことで着地不可能とアノテーションしてデータを追加
+$ #ドラッグで範囲を選択し、Enterを押すことでノイズ画像を取得
+$ #deleteやbackspaceで選択解除
+```
+
 
 ※今後更新予定・・・

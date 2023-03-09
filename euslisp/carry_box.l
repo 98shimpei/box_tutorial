@@ -21,7 +21,7 @@
 (send *ri* :wait-interpolation)
 
 ;; 逆運動学(Inverse Kinematics)を用いたロボットの姿勢の司令方法
-(print "press enter to put box") ;;ただのプリント文
+(print "press enter to lift a box") ;;ただのプリント文
 (read-line) ;;キーボード入力が来るまで待つ
 (send *robot* :rarm :inverse-kinematics (make-coords :pos #f(300 -400 1130) :rpy (float-vector 0 0 (deg2rad 0)))) ;;(make-coords)で生成した位置姿勢に右手が来るように、逆運動学を解いて関節角度を求める。今回は変えていないが、角度も変えたい場合はradで設定するかdeg2rad関数を用いてdegreeで設定
 (send *robot* :larm :inverse-kinematics (make-coords :pos #f(300 400 1130) :rpy (float-vector 0 0 (deg2rad 0)))) ;;左手も同様。

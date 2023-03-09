@@ -344,7 +344,6 @@ $ roslaunch terrain_recognition steppable_region.launch
 $ rosrun rviz rviz -d $(rospack find box_tutorial)/rviz/vision_walking.rviz
 
 #もしt265を使う場合は別タブで以下のコマンドを使用（シミュレーション時）
-```bash
 $ roslaunch realsense2_camera rs_t265_simulation.launch
 $ #このノードは（なぜか）エラーが起きやすい。choreonoid立ち上げ後、ロボットの陽動がおさまる（stabilizerが入る）あたりで実行するとうまく行きやすい。
 $ #このノードがずっと立ち上がらない場合はchoreonoidから立ち上げ直す。

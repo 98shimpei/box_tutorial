@@ -437,7 +437,7 @@ $ ./rm_generate_terrains.sh #生成済みの学習用データを消す。
 
 #地形データ＆教師データ生成。引数は生成データ数で、2000ぐらいがよい
 $ #./generate 生成数
-$ ./generate 2000
+$ ./generate_terrain.py 2000
 
 #着地可能領域学習。データ数は200000程度、epoch数は5~10程度で何回か繰り返す。３つ目の引数は、f:学習するかどうか、w:既存の重みをロードするかどうか、v:デバッグ用出力を表示するかどうか、を表す。
 $ #./real_steppable_region_learning.py 生成データ数 epoch数 f/w/v

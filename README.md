@@ -288,10 +288,10 @@ rvizはできることが色々あるので、JSK演習資料や公式：http://
 - hrpsysのログのとり方、描画方法を知る
 - 各種ツールの使い方
 
-###地形認識システム概要###
+### 地形認識システム概要
 このシステムは、不整地歩行での地形認識のために、環境点群をHeightmapに変換し、ニューラルネットに通すことで着地可能領域及び着地高さ・姿勢画像に変換し、着地位置姿勢を決めている。
 
-###vision環境構築(ubuntu18.04)###
+### vision環境構築(ubuntu18.04)
 python3を使うため、別のワークスペースを用意する必要がある（がんばれば一つのワークスペースでもできるかも）。
 このディレクトリの.rosinstall_visionを使ってもう一つワークスペースを構築する。
 
@@ -319,7 +319,7 @@ $ catkin build -DPYTHON_EXECUTABLE=/usr/bin/python3 -DPYTHON_INCLUDE_DIR=/usr/in
 ```
 
 
-###シミュレーションの実行方法###
+### シミュレーションの実行方法
 
 ```bash
 #3番タブにて
@@ -344,7 +344,6 @@ $ roslaunch terrain_recognition steppable_region.launch
 $ rosrun rviz rviz -d $(rospack find box_tutorial)/rviz/vision_walking.rviz
 
 #もしt265を使う場合は別タブで以下のコマンドを使用（シミュレーション時）
-```bash
 $ roslaunch realsense2_camera rs_t265_simulation.launch
 $ #このノードは（なぜか）エラーが起きやすい。choreonoid立ち上げ後、ロボットの陽動がおさまる（stabilizerが入る）あたりで実行するとうまく行きやすい。
 $ #このノードがずっと立ち上がらない場合はchoreonoidから立ち上げ直す。

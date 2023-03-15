@@ -1,7 +1,8 @@
 # auto_stabilizerのために必要
 - git:
-    uri: git@github.com:Naoki-Hiraoka/auto_stabilizer
+    uri: git@github.com:98shimpei/auto_stabilizer
     local-name: auto_stabilizer
+    version: shimpei
 - git:
     uri: git@github.com:kindsenior/hrpsys-base
     local-name: hrpsys
@@ -113,10 +114,12 @@
 
 - git:
     local-name: auto_stabilizer_config
-    uri: git@gitlab.jsk.imi.i.u-tokyo.ac.jp:hiraoka/auto_stabilizer_config.git
+    uri: git@gitlab.jsk.imi.i.u-tokyo.ac.jp:s-sato/auto_stabilizer_config.git
+    version: shimpei
 - git:
     local-name: box_tutorial
     uri: git@github.com:98shimpei/box_tutorial.git
+    version: shimpei_ast
 - git:
     local-name: ar_track_alvar
     uri: git@github.com:98shimpei/ar_track_alvar.git

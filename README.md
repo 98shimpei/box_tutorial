@@ -301,7 +301,7 @@ package.xmlを書くのをサボっていたので、多少抜けが有るかも
 ```bash
 #各種インストール
 $ sudo apt install python3-pip python3
-$ pip3 install -upgrade pip
+$ pip3 install --upgrade pip
 $ pip3 install rospkg catkin_pkg empy
 $ pip3 install tensorflow
 $ pip3 install opencv-python

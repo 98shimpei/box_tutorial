@@ -305,6 +305,7 @@ $ pip3 install -upgrade pip
 $ pip3 install rospkg catkin_pkg empy
 $ pip3 install tensorflow
 $ pip3 install opencv-python
+$ pip3 install cython
 $ echo "export TF_CPP_MIN_LOG_LEVEL=2" >> ~/.bashrc
 
 #poly2triのインストール ※よりよい方法求む

@@ -73,7 +73,7 @@
   <exec_depend>hrpsys_choreonoid_tutorials</exec_depend>
   <exec_depend>msl_hand_models</exec_depend>
   <exec_depend>msl_hand_controller</exec_depend>
-
+  <exec_depend>jsk_path_planner</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

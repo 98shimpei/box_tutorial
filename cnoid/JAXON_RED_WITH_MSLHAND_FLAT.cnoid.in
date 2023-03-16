@@ -58,7 +58,7 @@ items:
                0.000000]
             zmp: [ 0, 0, 0 ]
             collisionDetection: true
-            selfCollisionDetection: true
+            selfCollisionDetection: false
             isEditable: true
           children: 
             - 

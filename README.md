@@ -306,6 +306,7 @@ $ pip3 install rospkg catkin_pkg empy
 $ pip3 install tensorflow
 $ #pip3 install tensorflow==2.6.2    バージョンは2.6.2を推奨
 $ pip3 install opencv-python
+$ pip3 install cython
 $ echo "export TF_CPP_MIN_LOG_LEVEL=2" >> ~/.bashrc
 
 #poly2triのインストール ※よりよい方法求む
